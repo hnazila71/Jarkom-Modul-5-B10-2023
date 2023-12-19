@@ -201,7 +201,7 @@ iface eth0 inet static
 
 ### Web Server
 - Sein
-  ```
+```
 auto eth0
 iface eth0 inet static
 	address 192.183.8.2
@@ -211,7 +211,6 @@ iface eth0 inet static
 - Stark
 ```
 auto eth0
-```
 iface eth0 inet static
 	address 192.183.14.142
 	netmask 255.255.255.252
@@ -254,3 +253,222 @@ iface eth2 inet static
 	address 192.183.8.1
 	netmask 255.255.252.0
 ```
+
+### Frieren
+```
+auto eth0
+iface eth0 inet static
+	address 192.183.14.146
+	netmask 255.255.255.252
+	gateway 192.183.14.145
+
+auto eth1
+iface eth1 inet static
+	address 192.183.14.141
+	netmask 255.255.255.252
+
+auto eth2
+iface eth2 inet static
+	address 192.183.14.137
+	netmask 255.255.255.252
+```
+
+### Himmel
+```
+auto eth0
+iface eth0 inet static
+	address 192.183.14.146
+	netmask 255.255.255.252
+	gateway 192.183.14.145
+
+auto eth1
+iface eth1 inet static
+	address 192.183.14.141
+	netmask 255.255.255.252
+
+auto eth2
+iface eth2 inet static
+	address 192.183.14.137
+	netmask 255.255.255.252
+```
+
+### Fern
+```
+auto eth0
+iface eth0 inet static
+	address 192.183.14.3
+	netmask 255.255.255.128
+	gateway 192.183.14.1
+
+auto eth1
+iface eth1 inet static
+	address 192.183.14.133
+	netmask 255.255.255.252
+
+auto eth2
+iface eth2 inet static
+	address 192.183.14.129
+	netmask 255.255.255.252
+```
+- SchwerMountain, LaubHills, TurkRegion, GrobeForest
+```
+auto eth0
+iface eth0 inet dhcp
+```
+
+## Routing
+### Aura
+```
+route add -net 192.183.0.0    netmask 255.255.248.0   gw 192.183.14.150
+route add -net 192.183.8.0    netmask 255.255.252.0   gw 192.183.14.150
+route add -net 192.183.12.0   netmask 255.255.254.0   gw 192.183.14.146
+route add -net 192.183.14.0   netmask 255.255.255.128 gw 192.183.14.146
+route add -net 192.183.14.140 netmask 255.255.255.252 gw 192.183.14.146
+route add -net 192.183.14.136 netmask 255.255.255.252 gw 192.183.14.146
+route add -net 192.183.14.132 netmask 255.255.255.252 gw 192.183.14.146
+route add -net 192.183.14.128 netmask 255.255.255.252 gw 192.183.14.146
+```
+## Heiter
+```
+route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.183.14.149
+```
+## Frieren
+```
+route add -net 0.0.0.0        netmask 0.0.0.0         gw 192.183.14.145
+route add -net 192.183.12.0   netmask 255.255.254.0   gw 192.183.14.138
+route add -net 192.183.14.0   netmask 255.255.255.128 gw 192.183.14.138
+route add -net 192.183.14.132 netmask 255.255.255.252 gw 192.183.14.138
+route add -net 192.183.14.128 netmask 255.255.255.252 gw 192.183.14.138
+```
+### Himmel
+```
+route add -net 0.0.0.0        netmask 0.0.0.0         gw 192.183.14.137 
+route add -net 192.183.14.132 netmask 255.255.255.252 gw 192.183.14.3
+route add -net 192.183.14.128 netmask 255.255.255.252 gw 192.183.14.3
+```
+### Fern
+```
+route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.183.14.1
+```
+
+## Konfigurasi Richter
+```
+apt-get update
+apt-get install bind9 -y
+```
+## Konfigurasi Revolte
+```
+apt-get update
+apt-get install isc-dhcp-server -y
+dhcpd --version
+
+service isc-dhcp-server start
+```
+- ISC DHCP konfigurasi pada ```/etc/dhcp/dhcpd.conf``` Untuk range harus lebih dari yang pernah digunakan, semisal 192.183.0.0 itu di pakai sampai 192.183.0.2 maka range mulai 192.183.0.3 dan sampai max tidak masalah
+```
+option domain-name "example.org";
+option domain-name-servers ns1.example.org, ns2.example.org;
+default-lease-time 600;
+max-lease-time 7200;
+ddns-update-style none;
+subnet 192.183.14.128 netmask 255.255.255.252 {
+    option routers 192.183.14.129;
+}
+
+subnet 192.183.14.132 netmask 255.255.255.252 {
+}
+
+subnet 192.183.14.136 netmask 255.255.255.252 {
+    option routers 192.183.14.136;
+}
+
+subnet 192.183.14.140 netmask 255.255.255.252 {
+}
+
+subnet 192.183.14.144 netmask 255.255.255.252 {
+    option routers 192.183.14.145;
+}
+
+subnet 192.183.14.148 netmask 255.255.255.252 {
+    option routers 192.183.14.150;
+}
+subnet 192.183.0.0 netmask 255.255.248.0 {
+    range 192.183.0.2 192.183.4.4;
+    option routers 192.183.0.1;
+    option broadcast-address 192.183.7.255;
+    option domain-name-servers 192.183.14.134;
+    default-lease-time 720;
+    max-lease-time 5760;
+}
+subnet 192.183.8.0 netmask 255.255.252.0 {
+    range 192.183.8.3 192.183.10.5;
+    option routers 192.183.8.1;
+    option broadcast-address 192.183.11.255;
+    option domain-name-servers 192.183.14.134;
+    default-lease-time 720;
+    max-lease-time 5760;
+}
+subnet 192.183.12.0 netmask 255.255.254.0 {
+    range 192.183.12.2 192.183.13.1;
+    option routers 192.183.12.1;
+    option broadcast-address 192.183.13.255;
+    option domain-name-servers 192.183.14.134;
+    default-lease-time 720;
+    max-lease-time 5760;
+}
+
+subnet 192.183.14.0 netmask 255.255.255.128 {
+    range 192.183.14.4 192.183.14.67;
+    option routers 192.183.14.1;
+    option broadcast-address 192.183.14.127;
+    option domain-name-servers 192.183.14.134;
+    default-lease-time 720;
+    max-lease-time 5760;
+}
+```
+```
+service isc-dhcp-server restart
+apt-get install netcat
+```
+
+## Konfigurasi Himmel dan Heiter
+```
+apt-get update
+apt-get install isc-dhcp-relay -y
+service isc-dhcp-relay start
+
+echo '
+SERVERS="192.183.14.130"
+INTERFACES="eth0 eth1 eth2"
+OPTIONS=""
+' > /etc/default/isc-dhcp-relay
+
+echo '
+net.ipv4.ip_forward=1
+' > /etc/sysctl.conf
+
+service isc-dhcp-relay restart
+```
+## Konfigurasi Aura
+```
+ETH0_IP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+
+iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP
+
+apt-get update
+apt-get install isc-dhcp-relay -y
+service isc-dhcp-relay start
+
+echo '
+SERVERS="192.183.14.130"
+INTERFACES="eth1 eth2"
+OPTIONS=""
+' > /etc/default/isc-dhcp-relay
+
+echo '
+net.ipv4.ip_forward=1
+' > /etc/sysctl.conf
+
+service isc-dhcp-relay restart
+```
+
