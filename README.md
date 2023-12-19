@@ -491,3 +491,38 @@ ping google.com
 #### Hasil
 ![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/bcb7977a-f582-4346-a2e6-62e57e1c063b)
 
+## SOAL NO 2
+Kalian diminta untuk melakukan drop semua TCP dan UDP kecuali port 8080 pada TCP.
+- Kita konfigurasi dulu untuk pembatasan akses ke layanan tertentu pada TurkRegion
+```
+iptables -F
+iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
+iptables -A INPUT -p tcp ! --dport 8080 -j DROP
+iptables -A INPUT -p udp -j DROP
+```
+- iptables -F:
+Menghapus semua aturan (flush) dalam tabel iptables. Ini memastikan bahwa konfigurasi firewall sebelumnya dibersihkan sebelum menambahkan aturan baru.
+
+- iptables -A INPUT -p tcp --dport 8080 -j ACCEPT:
+Menerima (ACCEPT) paket TCP yang menuju port 8080.
+Aturan ini memungkinkan akses ke layanan yang berjalan pada port 8080 menggunakan protokol TCP.
+
+- iptables -A INPUT -p tcp ! --dport 8080 -j DROP:
+Menolak (DROP) paket TCP yang tidak menuju port 8080.
+Aturan ini mengabaikan (menolak) semua paket TCP ke port selain 8080, sehingga hanya paket yang ditujukan ke port 8080 yang akan diterima.
+
+- iptables -A INPUT -p udp -j DROP:
+Menolak (DROP) semua paket UDP.
+Aturan ini secara umum menolak semua paket yang menggunakan protokol UDP, tanpa mempertimbangkan port tujuan. Sebagai contoh, ini bisa digunakan untuk menutup semua layanan yang menggunakan UDP.
+
+Kita tes menggunakan Turk Region
+- Cari IP TurkRegion dengan ```ip a```
+- Lalu ```nc -l -p 80``` pada TurkRegion dan ```apt-get install netcat``` terlebih dahulu.
+Perintah nc -l -p 80 menggunakan Netcat untuk mendengarkan koneksi pada port 80, membuat sistem siap menerima koneksi masuk. Ini umumnya digunakan untuk membuat server sederhana atau mendengarkan koneksi untuk keperluan.
+ - ```nc 192.183.0.2 80 ``` pada Revolte
+
+Tes pertama
+![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/ef91f113-be88-4bde-9c61-9b0302b9564a)
+
+
+
