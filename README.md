@@ -521,8 +521,15 @@ Kita tes menggunakan Turk Region
 Perintah nc -l -p 80 menggunakan Netcat untuk mendengarkan koneksi pada port 80, membuat sistem siap menerima koneksi masuk. Ini umumnya digunakan untuk membuat server sederhana atau mendengarkan koneksi untuk keperluan.
  - ```nc 192.183.0.2 80 ``` pada Revolte
 
-Tes pertama
-![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/ef91f113-be88-4bde-9c61-9b0302b9564a)
+## Tes Sebelum
+- Revolte
 
+![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/4df9f8c9-d368-4d74-a8cc-8b4a2e29ddbf)
+
+- Turk Region
+
+![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/96bc5de3-8451-41fa-9dec-37cc77be0a10)
+
+## Tes Sesudah
 
 
