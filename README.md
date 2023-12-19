@@ -471,4 +471,9 @@ net.ipv4.ip_forward=1
 
 service isc-dhcp-relay restart
 ```
+## Konfigurasi Sein dan Stark 
+```
+apt-get update
+apt-get install netcat
+```
 
