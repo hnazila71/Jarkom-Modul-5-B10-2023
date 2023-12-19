@@ -568,11 +568,36 @@ iptables -A INPUT -p tcp --dport 22 -s 192.183.8.0/22 -j ACCEPT #A1
 iptables -A INPUT -p tcp --dport 22 -j DROP
 ```
 
+
 ### Tesing
+```
+nmap 192.183.8.2 -p 22
+```
 - LaubHills
+
 ![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/a9eb527d-1f28-4e94-86e9-5a3c35002ce4)
+
+
 - GrobeForest
+
 ![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/f0d50ac0-7a0d-4194-9073-572c0437ef21)
+
+
+## SOAL NO 5
+Selain itu, akses menuju WebServer hanya diperbolehkan saat jam kerja yaitu Senin-Jumat pada pukul 08.00-16.00.
+Pada Sein dan Stark
+```
+iptables -A INPUT -p tcp --dport 80 -m time --timestart 08:00 --timestop 16:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
+iptables -A INPUT -p tcp --dport 80 -j DROP
+```
+Pada aura
+```
+curl 192.183.8.2 -v
+```
+Tes pada Sein dan Stark
+```
+nc -l -p 80
+```
 
 
 
