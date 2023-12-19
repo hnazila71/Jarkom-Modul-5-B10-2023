@@ -1,4 +1,4 @@
-# Jarkom-Modul-5-B10-2023
+![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/d1ace16d-ed4e-48ed-b3a1-dd5c527cf450)# Jarkom-Modul-5-B10-2023
 
 ### Nama Anggota B10
  <table>
@@ -531,5 +531,33 @@ Perintah nc -l -p 80 menggunakan Netcat untuk mendengarkan koneksi pada port 80,
 ![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/96bc5de3-8451-41fa-9dec-37cc77be0a10)
 
 ## Tes Sesudah
+
+- Revolte
+
+![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/f03cd1d8-c182-44d5-bf85-daf2bdc88ca3)
+
+- TurkRegion
+
+![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/1664e252-424a-407a-bfe9-0de081b4f12c)
+
+## Soal NO 3
+Kepala Suku North Area meminta kalian untuk membatasi DHCP dan DNS Server hanya dapat dilakukan ping oleh maksimal 3 device secara bersamaan, selebihnya akan di drop.
+- Pada Revolte dan Richter
+```
+iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP
+```
+Perintah iptables tersebut memblokir lalu lintas ICMP yang memiliki lebih dari 3 koneksi dalam waktu yang sama, dengan mengabaikan alamat IP, dan mengarahkan untuk menjatuhkan (DROP) paket-paket tersebut.
+Tes
+- 1. Sein
+ ![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/3dfce426-f361-4f6b-b529-1e17a6cd790e) 
+- 2. Turk Region
+![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/d35aaded-6361-4bd2-9f8d-2258aa3ddc87)
+- 3. SchwerMontain
+![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/e18074e6-67cf-4673-91a0-58f25d8160db)
+- 4. LaubHills (DROP)
+![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/0151f475-512d-4e9f-acef-816ce9b5bff9)
+
+- Adanya paket loss karena terus mengirimkan setelah ping ke 4 LaubHills dan di drop semua jadi loss
+
 
 
