@@ -1,4 +1,4 @@
-![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/d1ace16d-ed4e-48ed-b3a1-dd5c527cf450)# Jarkom-Modul-5-B10-2023
+# Jarkom-Modul-5-B10-2023
 
 ### Nama Anggota B10
  <table>
@@ -549,6 +549,7 @@ iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j
 Perintah iptables tersebut memblokir lalu lintas ICMP yang memiliki lebih dari 3 koneksi dalam waktu yang sama, dengan mengabaikan alamat IP, dan mengarahkan untuk menjatuhkan (DROP) paket-paket tersebut.
 Tes
 - 1. Sein
+
  ![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/3dfce426-f361-4f6b-b529-1e17a6cd790e) 
 - 2. Turk Region
 ![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/d35aaded-6361-4bd2-9f8d-2258aa3ddc87)
@@ -558,6 +559,19 @@ Tes
 ![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/0151f475-512d-4e9f-acef-816ce9b5bff9)
 
 - Adanya paket loss karena terus mengirimkan setelah ping ke 4 LaubHills dan di drop semua jadi loss
+
+## Soal NO 4
+Lakukan pembatasan sehingga koneksi SSH pada Web Server hanya dapat dilakukan oleh masyarakat yang berada pada GrobeForest.
+Kita Konfigurasi pada Sein dan Stark
+```
+iptables -A INPUT -p tcp --dport 22 -s 192.183.8.0/22 -j ACCEPT
+iptables -A INPUT -p tcp --dport 22 -j DROP
+```
+
+### Tesing
+- LaubHills
+![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/a9eb527d-1f28-4e94-86e9-5a3c35002ce4)
+- GrobeForest
 
 
 
