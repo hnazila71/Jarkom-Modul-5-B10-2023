@@ -564,7 +564,7 @@ Tes
 Lakukan pembatasan sehingga koneksi SSH pada Web Server hanya dapat dilakukan oleh masyarakat yang berada pada GrobeForest.
 Kita Konfigurasi pada Sein dan Stark
 ```
-iptables -A INPUT -p tcp --dport 22 -s 192.183.8.0/22 -j ACCEPT
+iptables -A INPUT -p tcp --dport 22 -s 192.183.8.0/22 -j ACCEPT #A1
 iptables -A INPUT -p tcp --dport 22 -j DROP
 ```
 
@@ -572,6 +572,10 @@ iptables -A INPUT -p tcp --dport 22 -j DROP
 - LaubHills
 ![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/a9eb527d-1f28-4e94-86e9-5a3c35002ce4)
 - GrobeForest
+![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/f0d50ac0-7a0d-4194-9073-572c0437ef21)
+
+
+
 
 
 
