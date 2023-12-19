@@ -351,12 +351,12 @@ route add -net 192.183.14.128 netmask 255.255.255.252 gw 192.183.14.3
 route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.183.14.1
 ```
 
-## Konfigurasi Richter
+### Konfigurasi Richter
 ```
 apt-get update
 apt-get install bind9 -y
 ```
-## Konfigurasi Revolte
+### Konfigurasi Revolte
 ```
 apt-get update
 apt-get install isc-dhcp-server -y
@@ -431,7 +431,7 @@ service isc-dhcp-server restart
 apt-get install netcat
 ```
 
-## Konfigurasi Himmel dan Heiter
+### Konfigurasi Himmel dan Heiter
 ```
 apt-get update
 apt-get install isc-dhcp-relay -y
@@ -449,7 +449,7 @@ net.ipv4.ip_forward=1
 
 service isc-dhcp-relay restart
 ```
-## Konfigurasi Aura
+### Konfigurasi Aura
 ```
 ETH0_IP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
 
@@ -471,9 +471,23 @@ net.ipv4.ip_forward=1
 
 service isc-dhcp-relay restart
 ```
-## Konfigurasi Sein dan Stark 
+### Konfigurasi Sein dan Stark 
 ```
 apt-get update
 apt-get install netcat
 ```
+
+## SOAL NO 1
+Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi Aura menggunakan iptables, tetapi tidak ingin menggunakan MASQUERADE.
+```
+iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP
+```
+Perintah ini mengatur iptables untuk memproses paket yang keluar melalui antarmuka jaringan eth0. Setiap paket yang keluar akan mengalami proses Network Address Translation (NAT), di mana alamat IP sumber (source) dari paket tersebut akan diganti dengan nilai dari variabel $ETH0_IP. Ini digunakan untuk mengubah alamat sumber paket sebelum meninggalkan sistem.
+
+Setelah itu coba ping di Stark 
+```
+ping google.com 
+```
+#### Hasil
+![image](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/114125438/bcb7977a-f582-4346-a2e6-62e57e1c063b)
 
