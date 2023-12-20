@@ -618,7 +618,7 @@ iptables -A INPUT -p tcp --dport 80 -m time --timestart 11:00 --timestop 13:00 -
 ```
 Drop other HTTP traffic
 ```
-sudo iptables -A INPUT -p tcp --dport 80 -j DROP
+iptables -A INPUT -p tcp --dport 80 -j DROP
 ```
 check server time
 ```
@@ -638,7 +638,7 @@ date 121319002023.00
 ```
 day server
 ```
-sudo date 121313002023.00
+date 121313002023.00
 ```
 ### Testing
 
