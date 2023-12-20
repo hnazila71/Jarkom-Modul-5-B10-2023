@@ -569,7 +569,7 @@ iptables -A INPUT -p tcp --dport 22 -j DROP
 ```
 
 
-### Tesing
+### Testing
 ```
 nmap 192.183.8.2 -p 22
 ```
@@ -599,8 +599,100 @@ Tes pada Sein dan Stark
 nc -l -p 80
 ```
 
+### Testing
 
 
+![Screenshot (156)](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/128909158/ddff83c2-ae0a-445c-893c-413cb61398cc)
 
+## SOAL NO 6
+Lalu, karena ternyata terdapat beberapa waktu di mana network administrator dari WebServer tidak bisa stand by, sehingga perlu ditambahkan rule bahwa akses pada hari Senin - Kamis pada jam 12.00 - 13.00 dilarang (istirahat maksi cuy) dan akses di hari Jumat pada jam 11.00 - 13.00 juga dilarang (maklum, Jumatan rek).
 
+Allow HTTP access only outside restricted hours (Monday-Thursday 12:00-13:00, Friday 11:00-13:00)
+```
+iptables -A INPUT -p tcp --dport 80 -m time --timestart 13:01 --timestop 10:59 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
+```
+Drop HTTP traffic during restricted hours (Monday-Thursday 12:00-13:00, Friday 11:00-13:00)
+```
+iptables -A INPUT -p tcp --dport 80 -m time --timestart 12:00 --timestop 13:00 --weekdays Mon,Tue,Wed,Thu -j DROP
+iptables -A INPUT -p tcp --dport 80 -m time --timestart 11:00 --timestop 13:00 --weekdays Fri -j DROP
+```
+Drop other HTTP traffic
+```
+sudo iptables -A INPUT -p tcp --dport 80 -j DROP
+```
+check server time
+```
+date
+```
+testing webserver
+```
+nc -l -p 80
+```
+testing client
+```
+nc ipwebserver 80
+```
+night server
+```
+date 121319002023.00
+```
+day server
+```
+sudo date 121313002023.00
+```
+### Testing
 
+![Screenshot (156)](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/128909158/319e376e-771e-40ee-841c-72967fa19c33)
+
+## Soal NO 7
+
+Karena terdapat 2 WebServer, kalian diminta agar setiap client yang mengakses Sein dengan Port 80 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan dan request dari client yang mengakses Stark dengan port 443 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan.
+
+```
+iptables -A PREROUTING -t nat -p tcp --dport 80 -d 192.183.8.2 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.183.8.2
+
+iptables -A PREROUTING -t nat -p tcp --dport 80 -d 192.183.8.2 -j DNAT --to-destination 192.183.14.142
+
+iptables -A PREROUTING -t nat -p tcp --dport 443 -d 192.183.14.142 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.183.14.142
+
+iptables -A PREROUTING -t nat -p tcp --dport 443 -d 192.183.14.142 -j DNAT --to-destination 192.183.8.2
+```
+
+## Soal NO 8
+
+Karena berbeda koalisi politik, maka subnet dengan masyarakat yang berada pada Revolte dilarang keras mengakses WebServer hingga masa pencoblosan pemilu kepala suku 2024 berakhir. Masa pemilu (hingga pemungutan dan penghitungan suara selesai) kepala suku bersamaan dengan masa pemilu Presiden dan Wakil Presiden Indonesia 2024.
+
+```
+iptables -A INPUT -s 192.183.14.130 -p tcp --dport 80 -m time --datestart "2023-12-14" --datestop "2024-06-26" -j DROP
+```
+
+### Testing
+
+![Screenshot (156)](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/128909158/7be12a06-27c0-4b12-9be7-dd8ada54c1cd)
+
+## Soal NO 9
+
+Sadar akan adanya potensial saling serang antar kubu politik, maka WebServer harus dapat secara otomatis memblokir  alamat IP yang melakukan scanning port dalam jumlah banyak (maksimal 20 scan port) di dalam selang waktu 10 menit. 
+(clue: test dengan nmap)
+
+```
+iptables -N scan_port
+
+iptables -A INPUT -m recent --name scan_port --update --seconds 600 --hitcount 20 -j DROP
+iptables -A FORWARD -m recent --name scan_port --update --seconds 600 --hitcount 20 -j DROP
+
+iptables -A INPUT -m recent --name scan_port --set -j ACCEPT
+iptables -A FORWARD -m recent --name scan_port --set -j ACCEPT
+```
+
+### Testing
+
+![Screenshot (157)](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/128909158/46950a92-55c9-443b-b1d4-1f5967c2185f)
+
+## Soal NO 10
+
+Karena kepala suku ingin tau paket apa saja yang di-drop, maka di setiap node server dan router ditambahkan logging paket yang di-drop dengan standard syslog level. 
+
+```
+iptables -A INPUT  -j LOG --log-level debug --log-prefix 'Packet Drop 1/second --limit-burst 10
+```
