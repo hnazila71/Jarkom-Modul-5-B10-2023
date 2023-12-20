@@ -1,20 +1,36 @@
 # Jarkom-Modul-5-B10-2023
 
 ### Nama Anggota B10
- <table>
- 	<tr>
- 		<td> Nama </td>
- 		<td> NRP </td>
- 	</tr>
- 	<tr>
- 		<td> Yusuf Hasan Nazila </td>
- 		<td> 5025211225</td>
- 	</tr>
-	 <tr>
-		 <td> Farhan Dwi Putra </td>
- 		<td> 5025211093</td>
-	 </tr>
- </table>
+<table>
+	<tr>
+		<td> Nama </td>
+		<td> NRP </td>
+		<td> Kontribusi Modul 1 </td>
+		<td> Kontribusi Modul 2 </td>
+		<td> Kontribusi Modul 3 </td>
+		<td> Kontribusi Modul 4 </td>
+		<td> Kontribusi Modul 5 </td>
+	</tr>
+	<tr>
+		<td> Yusuf Hasan Nazila </td>
+		<td> 5025211225</td>
+		<td> 50%</td>
+		<td> 50%</td>
+		<td> 50%</td>
+		<td> 50%</td>
+		<td> 50%</td>
+	</tr>
+	<tr>
+		<td> Farhan Dwi Putra </td>
+		<td> 5025211093</td>
+		<td> 50%</td>
+		<td> 50%</td>
+		<td> 50%</td>
+		<td> 50%</td>
+		<td> 50%</td>
+	</tr>
+</table>
+
 
 
 
