@@ -624,14 +624,6 @@ check server time
 ```
 date
 ```
-testing webserver
-```
-nc -l -p 80
-```
-testing client
-```
-nc ipwebserver 80
-```
 night server
 ```
 date 121319002023.00
@@ -641,6 +633,15 @@ day server
 date 121313002023.00
 ```
 ### Testing
+
+testing webserver
+```
+nc -l -p 80
+```
+testing client
+```
+nc ipwebserver 80
+```
 
 ![Screenshot (156)](https://github.com/hnazila71/Jarkom-Modul-5-B10-2023/assets/128909158/319e376e-771e-40ee-841c-72967fa19c33)
 
